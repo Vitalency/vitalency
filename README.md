@@ -1,6 +1,6 @@
 # vitalency
 
-> My groovy Nuxt.js project
+> Vitalency dotcom
 
 ## Build Setup
 
