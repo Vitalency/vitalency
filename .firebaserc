@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "vitalency-dev",
+    "dev": "vitalency-dev"
+  }
+}

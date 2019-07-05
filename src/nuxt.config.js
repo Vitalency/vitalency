@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   mode: 'universal',
   /*
    ** Headers of the page
@@ -33,14 +33,8 @@ export default {
    */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios',
     '@nuxtjs/eslint-module'
   ],
-  /*
-   ** Axios module configuration
-   ** See https://axios.nuxtjs.org/options
-   */
-  axios: {},
   /*
    ** Build configuration
    */
@@ -54,5 +48,6 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {}
-  }
+  },
+  buildDir: 'nuxt'
 }
