@@ -20,3 +20,15 @@ $ yarn generate
 ```
 
 For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
+
+
+## Firebase
+
+# Install the Firebase tools
+`yarn global firebase-tools`
+
+# Login to your account
+`firebase login`
+
+# Generate static assets and deploy the app
+`yarn deploy`
