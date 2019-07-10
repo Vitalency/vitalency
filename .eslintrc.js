@@ -19,6 +19,10 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
-    "prettier/prettier": 1
+    "prettier/prettier": 1,
+    "space-before-function-paren": 1
+  },
+  globals: {
+    $nuxt: true
   }
 }
