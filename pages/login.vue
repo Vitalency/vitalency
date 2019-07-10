@@ -72,7 +72,7 @@ export default {
         )
     },
     loginWithFacebook: function () {
-      this.provider = firebase.auth().FacebookAuthProvider()
+      this.provider = new firebase.auth.FacebookAuthProvider()
       firebase.auth().signInWithPopup(this.provider)
         .then(
           (result) => {
