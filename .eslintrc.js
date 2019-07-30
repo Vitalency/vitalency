@@ -20,7 +20,16 @@ module.exports = {
   // add your custom rules here
   rules: {
     "prettier/prettier": 1,
-    "space-before-function-paren": 1
+    "space-before-function-paren": 0,
+    "vue/html-self-closing": ["error", {
+      "html": {
+        "void": "any",
+        "normal": "any",
+        "component": "any"
+      },
+      "svg": "any",
+      "math": "any"
+    }]
   },
   globals: {
     $nuxt: true
