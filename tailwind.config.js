@@ -1,6 +1,10 @@
 // See default config https://github.com/tailwindcss/tailwindcss/blob/master/stubs/defaultConfig.stub.js
 module.exports = {
   theme: {
+    fontFamily: {
+      'title': 'Nunito, -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol',
+      'body': 'Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol',
+    },
     fontSize: {
       'xs': '10px',
       'sm': '12px',
@@ -8,6 +12,9 @@ module.exports = {
       'lg': '16px',
       'xl': '18px',
       '2xl': '20px',
+      '3xl': '24px',
+      '4xl': '32px',
+      '5xl': '42px',
     },
     borderRadius: {
       'none': '0',
