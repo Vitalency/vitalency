@@ -14,6 +14,9 @@ if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig)
 }
 
+export const auth = firebase.auth()
+export const FacebookProvider = new firebase.auth.FacebookAuthProvider()
+
 // let app = null
 // if (!firebase.apps.length) {
 //   app = firebase.initializeApp(firebaseConfig)
