@@ -5,9 +5,9 @@
       @submit.prevent="login"
     >
       <div class="mb-4">
-        <label
-class="block text-gray-700 text-sm font-bold mb-2"
-for="email">Email address</label>
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+          Email address
+        </label>
         <input
           id="email"
           v-model="email"
@@ -18,8 +18,11 @@ for="email">Email address</label>
       </div>
       <div class="mb-6">
         <label
-class="block text-gray-700 text-sm font-bold mb-2"
-for="password">Password</label>
+          class="block text-gray-700 text-sm font-bold mb-2"
+          for="password"
+        >
+          Password
+        </label>
         <input
           id="password"
           v-model="password"
@@ -41,7 +44,9 @@ for="password">Password</label>
         <a
           class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
           href="#"
-        >Forgot Password?</a>
+        >
+          Forgot Password?
+        </a>
       </div>
     </form>
 
@@ -73,39 +78,30 @@ export default {
     }
   },
   methods: {
-    login: function () {
+    login: function() {
       firebase
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then(
-          function (user) {
+          function(user) {
             alert('Well done!')
           },
-          function (error) {
+          function(error) {
             alert('Ooops! ' + error.message)
           }
         )
     },
-    loginWithFacebook: function () {
-      debugger
-
-      this.$store.dispatch('signInWithFacebook').then(() => {
-        this.$router.push('/registered')
-      }).catch((error) => {
-        debugger
-        alert('Ooops! ' + error.message)
-      })
-
-      // this.provider = new firebase.auth.FacebookAuthProvider()
-      // firebase
-      //   .auth()
-      //   .signInWithPopup(this.provider)
-      //   .then((result) => {
-      //     this.$router.push('/')
-      //   })
-      //   .catch((error) => {
-      //     alert('!Ooops! ' + error.message)
-      //   })
+    loginWithFacebook: function() {
+      this.provider = new firebase.auth.FacebookAuthProvider()
+      firebase
+        .auth()
+        .signInWithPopup(this.provider)
+        .then((result) => {
+          this.$router.push('/')
+        })
+        .catch((error) => {
+          alert('!Ooops! ' + error.message)
+        })
     }
   }
 }
