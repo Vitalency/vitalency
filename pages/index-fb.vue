@@ -50,12 +50,7 @@
 import firebase from 'firebase'
 
 export default {
-  data (context) {
-    return {
-      facebookToken: null,
-      user: null
-    }
-  },
+  middleware: 'auth',
   components: {},
   methods: {
     loginWithFacebook: function() {
@@ -85,6 +80,10 @@ export default {
           // Update our page data so we can display new results
           this.facebookToken = result.credential.accessToken
           this.user = result.user
+
+          // Update our store so we know this person is authenticated, and then redirect to the thank you page
+          this.$store.commit('setUser', result.user)
+          this.$router.push('/thankyou') // This page will redirect if they aren't authenticated
         })
         .catch((error) => {
           const errorCode = error.code
