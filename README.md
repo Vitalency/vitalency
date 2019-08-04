@@ -26,7 +26,7 @@ For detailed explanation on how things work, checkout [Nuxt.js docs](https://nux
 
 ``` bash
 # Install the Firebase tools
-yarn global firebase-tools
+yarn global add firebase-tools
 
 # Login to your account
 firebase login
