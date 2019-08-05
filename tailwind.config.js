@@ -24,6 +24,9 @@ module.exports = {
       'lg': '8px',
       'xl': '16px',
     },
+    screens: {
+      'tablet': '900px',
+    },
     extend: {
       padding: {
         px: '1px',

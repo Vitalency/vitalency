@@ -1,22 +1,22 @@
 <template>
   <div class="flex">
     <div class="hero">
-      <header class="p-4">
+      <header class="p-4 mb-8 tablet:mb-0">
         <img src="~assets/images/logo-full-white.svg" alt="vitalency logo" />
       </header>
-      <div style="height: calc(100% - 92px);" class="flex items-center justify-end pl-8">
+      <div class="hero-content-container">
         <div class="hero-content">
-          <div style="margin-right: -120px;" class="text-white">
+          <div class="hero-content-info">
             <div style="line-height: 1.25;" class="text-5xl font-title mb-2">
               Check-ins to keep you in check
             </div>
-            <p class="text-xl text-white">
+            <p class="text-xl text-white mb-8 tablet:mb-0">
               Support your day to day with a health coach to stay on track with
               your pregnancy. Set goals that work for you and your baby’s health
               - we’ll follow your lead.
             </p>
           </div>
-          <div class="flip-container">
+          <div class="flip-container mb-8">
             <div
               class="signup-form-container"
               :class="{ flipped: isFacebookAuthed }"
@@ -142,6 +142,7 @@ export default {
 </script>
 
 <style>
+
 body {
   @apply font-body;
   @apply text-base;
@@ -152,33 +153,10 @@ p {
   color: #747d8c;
 }
 
-.vt-input-container {
-  @apply block;
-  @apply relative;
-}
-
-.vt-input {
-  @apply pl-8;
-  @apply font-semibold;
-  @apply font-title;
-  width: 100%;
-  height: 42px;
-  color: #ff6b81;
-  background: rgba(255, 107, 129, 0.04);
-  border: 1px solid rgba(255, 107, 129, 0.4);
-  border-radius: 21px;
-}
-
-.vt-input-label {
-  @apply font-title;
-  @apply font-bold;
-  color: #ff6b81;
-}
-
 .hero {
   @apply relative;
-  height: 100vh;
   flex: 3;
+  min-height: 100vh;
   background: radial-gradient(1128.82px at 0% 100%, #ff7f50 0%, #ff6b81 100%);
 }
 
@@ -195,10 +173,17 @@ p {
 }
 
 .hero-sidebar {
+  @apply hidden;
   @apply relative;
   @apply bg-white;
   @apply flex-1;
   min-width: 250px;
+}
+
+@screen tablet {
+  .hero-sidebar {
+    @apply block;
+  }
 }
 
 .hero-sidebar::after {
@@ -213,22 +198,58 @@ p {
   background: url('~assets/images/pattern-dark.svg');
 }
 
-.hero-content {
-  @apply flex;
+.hero-content-container {
   @apply items-center;
-  @apply justify-between;
+  @apply justify-end;
+  @apply px-4;
+}
+
+@screen tablet {
+  .hero-content-container {
+    @apply flex;
+    @apply pl-8;
+    @apply pr-0;
+    height: calc(100% - 92px);
+  }
+}
+
+.hero-content {
   position: relative;
   z-index: 1;
   width: 100%;
   max-width: 1000px;
 }
 
+@screen tablet {
+  .hero-content {
+    @apply flex;
+    @apply items-center;
+    @apply justify-between;
+  }
+}
+
+.hero-content-info {
+  @apply text-white;
+}
+
+@screen tablet {
+  .hero-content-info {
+    margin-right: -120px;
+  }
+}
+
 .flip-container {
   @apply relative;
-  width: 50%;
-  min-width: 368px;
+  @apply w-full;
   perspective: 800px;
-  transform: translateX(50%);
+}
+
+@screen tablet {
+  .flip-container {
+    @apply w-1/2;
+    transform: translateX(50%);
+    min-width: 368px;
+  }
 }
 
 .signup-form-container,
