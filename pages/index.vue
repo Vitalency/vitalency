@@ -12,8 +12,8 @@
             </div>
             <p class="text-xl text-white">
               Support your day to day with a health coach to stay on track with
-              your pregnancy. Set goals that work for you and your baby’s
-              health - we’ll follow your lead.
+              your pregnancy. Set goals that work for you and your baby’s health
+              - we’ll follow your lead.
             </p>
           </div>
           <div class="signup-form-container overflow-hidden">
@@ -22,13 +22,15 @@
                 Join Vitalency
               </div>
               <p class="text-lg">
-                Your first step is meeting your awesome new health coach. Enter your email and we'll reach out soon!
+                Your first step is meeting your awesome new health coach.
+                Connect to your facebook below and you'll hear from your health
+                coach soon to get started!
               </p>
             </header>
             <div class="signup-form">
               <form @submit.prevent="loginWithFacebook">
                 <button class="btn btn-primary btn-full" type="submit">
-                    f - Get Started Using Facebook
+                  Get started using Facebook
                 </button>
               </form>
               <!-- <label class="vt-input-container mb-1">
@@ -109,17 +111,21 @@ export default {
       const birthday = new Date(userDetails.birthday)
 
       // The UID will be used as the key
-      firebase.firestore().collection('users').doc(userDetails.uid).set({
-        firstName: userDetails.firstName,
-        lastName: userDetails.lastName,
-        gender: userDetails.gender,
-        facebookProfileLink: userDetails.facebookProfileLink,
-        birthday: {
-          month: birthday.getMonth() + 1,
-          day: birthday.getDate(),
-          year: birthday.getFullYear()
-        }
-      })
+      firebase
+        .firestore()
+        .collection('users')
+        .doc(userDetails.uid)
+        .set({
+          firstName: userDetails.firstName,
+          lastName: userDetails.lastName,
+          gender: userDetails.gender,
+          facebookProfileLink: userDetails.facebookProfileLink,
+          birthday: {
+            month: birthday.getMonth() + 1,
+            day: birthday.getDate(),
+            year: birthday.getFullYear()
+          }
+        })
     }
   }
 }

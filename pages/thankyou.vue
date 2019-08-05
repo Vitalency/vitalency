@@ -12,8 +12,8 @@
             </div>
             <p class="text-xl text-white">
               Support your day to day with a health coach to stay on track with
-              your pregnancy. Set goals that work for you and your baby’s
-              health - we’ll follow your lead.
+              your pregnancy. Set goals that work for you and your baby’s health
+              - we’ll follow your lead.
             </p>
           </div>
           <div class="signup-form-container overflow-hidden">
@@ -28,7 +28,7 @@
     </div>
     <div class="hero-sidebar">
       <header class="flex justify-end p-4 z-10">
-        <button class="btn" v-on:click="logout">
+        <button class="btn" @click="logout">
           SIGN OUT
         </button>
       </header>
