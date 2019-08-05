@@ -4,7 +4,7 @@
       <header class="p-4">
         <img src="~assets/images/logo-full-white.svg" alt="vitalency logo" />
       </header>
-      <div style="height: calc(100% - 92px);" class="flex items-center pl-8">
+      <div style="height: calc(100% - 92px);" class="flex items-center justify-end pl-8">
         <div class="hero-content">
           <div style="margin-right: -120px;" class="text-white">
             <div style="line-height: 1.25;" class="text-5xl font-title mb-2">
@@ -16,46 +16,51 @@
               - we’ll follow your lead.
             </p>
           </div>
-          <div class="signup-form-container overflow-hidden">
-            <header class="p-4">
-              <div class="font-title font-semibold text-3xl mb-1">
-                Join Vitalency
-              </div>
-              <p class="text-lg">
-                Your first step is meeting your awesome new health coach.
-                Connect to your facebook below and you'll hear from your health
-                coach soon to get started!
-              </p>
-            </header>
-            <div class="signup-form">
-              <form @submit.prevent="loginWithFacebook">
-                <button class="btn btn-primary btn-full" type="submit">
+          <div class="flip-container">
+            <div
+              class="signup-form-container"
+              :class="{ flipped: isFacebookAuthed }"
+            >
+              <header class="p-4">
+                <div class="font-title font-semibold text-3xl mb-1">
+                  Join Vitalency
+                </div>
+                <p class="text-lg">
+                  Your first step is meeting your awesome new health coach.
+                  Connect to your facebook below and you'll hear from your health
+                  coach soon to get started!
+                </p>
+              </header>
+              <div class="signup-form">
+                <button
+                  @click="loginWithFacebook"
+                  class="btn btn-primary btn-full"
+                >
                   Get started using Facebook
                 </button>
-              </form>
-              <!-- <label class="vt-input-container mb-1">
-                <span
-                  style="top: 0; left: 16px; line-height: 42px;"
-                  class="vt-input-label absolute"
-                >
-                  Email
-                </span>
-                <input type="text" class="vt-input" />
-              </label>
-              <button class="btn btn-primary btn-full">
-                Get started
-              </button> -->
+              </div>
+            </div>
+            <div
+            class="thank-you-container"
+            :class="{ flipped: isFacebookAuthed }"
+            >
+              <div>
+                <div class="mb-2">
+                  <img src="~assets/images/logo-icon.svg" alt="vitalency logo" />
+                </div>
+                <div class="font-title font-semibold text-3xl mb-1">
+                  Thank you!
+                </div>
+                <p class="text-lg">
+                  Your Vitalency health coach will be reaching out to you soon to get started. We're very excited to work with you!
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="hero-sidebar">
-      <header class="flex justify-end p-4 z-10">
-        <!-- <button class="btn">
-          SIGN IN
-        </button> -->
-      </header>
     </div>
   </div>
 </template>
@@ -64,6 +69,11 @@
 import firebase from 'firebase'
 
 export default {
+  computed: {
+    isFacebookAuthed() {
+      return this.$store.state.isFacebookAuthed
+    }
+  },
   middleware: 'auth',
   components: {},
   methods: {
@@ -93,7 +103,7 @@ export default {
 
           // Update our store so we know this person is authenticated, and then redirect to the thank you page
           this.$store.commit('setUser', result.user)
-          this.$router.push('/thankyou') // This page will redirect if they aren't authenticated
+          this.$store.commit('authFacebook', true)
         })
         .catch((error) => {
           const errorCode = error.code
@@ -210,15 +220,52 @@ p {
   position: relative;
   z-index: 1;
   width: 100%;
+  max-width: 1000px;
+}
+
+.flip-container {
+  @apply relative;
+  width: 50%;
+  min-width: 368px;
+  perspective: 800px;
+  transform: translateX(50%);
+}
+
+.signup-form-container,
+.thank-you-container {
+  @apply overflow-hidden;
+  @apply rounded-lg;
+  @apply bg-white;
+  backface-visibility: hidden;
+  box-shadow: 0px 8px 24px rgba(154, 44, 51, 0.16);
+  transition: 0.5s;
+  transform-style: preserve-3d;
 }
 
 .signup-form-container {
-  @apply bg-white;
-  @apply rounded-lg;
-  width: 50%;
-  min-width: 368px;
-  transform: translateX(50%);
-  box-shadow: 0px 8px 24px rgba(154, 44, 51, 0.16);
+  z-index: 2;
+  transform: rotateY(0deg);
+}
+
+.signup-form-container.flipped {
+  transform: rotateY(-180deg);
+}
+
+.thank-you-container {
+  @apply flex;
+  @apply items-center;
+  @apply absolute;
+  @apply top-0;
+  @apply left-0;
+  @apply w-full;
+  @apply h-full;
+  @apply p-4;
+  z-index: 1;
+  transform: rotateY(180deg);
+}
+
+.thank-you-container.flipped {
+  transform: rotateY(0deg);
 }
 
 .signup-form {

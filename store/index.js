@@ -4,7 +4,8 @@ import { auth } from '@/plugins/firebase.js'
 const createStore = () => {
   return new Vuex.Store({
     state: {
-      user: null
+      user: null,
+      isFacebookAuthed: false
     },
     getters: {
       activeUser: (state, getters) => {
@@ -14,6 +15,9 @@ const createStore = () => {
     mutations: {
       setUser(state, payload) {
         state.user = payload
+      },
+      authFacebook(state, payload) {
+        state.isFacebookAuthed = payload
       }
     },
     actions: {

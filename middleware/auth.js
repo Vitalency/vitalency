@@ -1,7 +1,7 @@
 export default function({ store, redirect, route }) {
   // Take authenticated users right to Thank You
   if (route.name === 'index' && store.state.user !== null) {
-    redirect('/thankyou')
+    this.$store.commit('isfacebookAuthed', true)
   }
 
   // Otherwise, redirect from everywhere to the login page
