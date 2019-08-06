@@ -31,6 +31,9 @@ yarn global add firebase-tools
 # Login to your account
 firebase login
 
+# Alias vitalency-dev as the deploy target
+firebase use --add
+
 # Generate static assets and deploy the app
 yarn deploy
 ```
