@@ -11,10 +11,12 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "deploy": "nuxt generate && firebase deploy"
+    "deploy": "nuxt generate && firebase deploy",
+    "deploy-production": "mv .env .env-dev && mv .env-prod .env && nuxt generate && firebase use vitalency-prod && firebase deploy && firebase use vitalency-dev && mv .env .env-prod && mv .env-dev .env"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
+    "@nuxtjs/dotenv": "^1.4.0",
     "eslint-plugin-prettier": "^3.1.0",
     "firebase": "^6.2.4",
     "nuxt": "^2.0.0"

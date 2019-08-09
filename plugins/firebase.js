@@ -2,13 +2,13 @@ import firebase from 'firebase'
 import 'firebase/firestore'
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyAx973RDfN4QH7zmRpQG-8mf2FywcX4IXM',
-  authDomain: 'vitalency-dev.firebaseapp.com',
-  databaseURL: 'https://vitalency-dev.firebaseio.com',
-  projectId: 'vitalency-dev',
+  apiKey: process.env.apiKey,
+  authDomain: process.env.authDomain,
+  databaseURL: process.env.databaseURL,
+  projectId: process.env.projectId,
   storageBucket: '',
-  messagingSenderId: '214492986664',
-  appId: '1:214492986664:web:dd1627954ceafd5e'
+  messagingSenderId: process.env.messagingSenderId,
+  appId: process.env.appId
 }
 
 if (!firebase.apps.length) {
