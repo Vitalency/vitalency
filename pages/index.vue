@@ -27,32 +27,36 @@
                 </div>
                 <p class="text-lg">
                   Your first step is meeting your awesome new health coach.
-                  Connect to your facebook below and you'll hear from your health
-                  coach soon to get started!
+                  Connect to your facebook below and you'll hear from your
+                  health coach soon to get started!
                 </p>
               </header>
               <div class="signup-form">
                 <button
-                  @click="loginWithFacebook"
                   class="btn btn-primary btn-full"
+                  @click="loginWithFacebook"
                 >
                   Get started using Facebook
                 </button>
               </div>
             </div>
             <div
-            class="thank-you-container"
-            :class="{ flipped: isFacebookAuthed }"
+              class="thank-you-container"
+              :class="{ flipped: isFacebookAuthed }"
             >
               <div>
                 <div class="mb-2">
-                  <img src="~assets/images/logo-icon.svg" alt="vitalency logo" />
+                  <img
+                    src="~assets/images/logo-icon.svg"
+                    alt="vitalency logo"
+                  />
                 </div>
                 <div class="font-title font-semibold text-3xl mb-1">
                   Thank you!
                 </div>
                 <p class="text-lg">
-                  Your Vitalency health coach will be reaching out to you soon to get started. We're very excited to work with you!
+                  Your Vitalency health coach will be reaching out to you soon
+                  to get started. We're very excited to work with you!
                 </p>
               </div>
             </div>
@@ -60,8 +64,7 @@
         </div>
       </div>
     </div>
-    <div class="hero-sidebar">
-    </div>
+    <div class="hero-sidebar"></div>
   </div>
 </template>
 
@@ -69,13 +72,13 @@
 import firebase from 'firebase'
 
 export default {
+  components: {},
   computed: {
     isFacebookAuthed() {
       return this.$store.state.isFacebookAuthed
     }
   },
   middleware: 'auth',
-  components: {},
   methods: {
     loginWithFacebook: function() {
       // Setup the facebook provider and request the attributes we need
@@ -142,7 +145,6 @@ export default {
 </script>
 
 <style>
-
 body {
   @apply font-body;
   @apply text-base;
