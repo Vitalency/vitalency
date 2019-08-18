@@ -9,7 +9,14 @@
     </h2>
 
     <p>
-      Welcome to https://teamvitalency.com. The https://teamvitalency.com website (the "Site") is comprised of various web pages operated by Vitalency, LLC ("4336 Creekbend Drive"). https://teamvitalency.com is offered to you conditioned on your acceptance without modification of the terms, conditions, and notices contained herein (the "Terms"). Your use of https://teamvitalency.com constitutes your agreement to all such Terms. Please read these terms carefully, and keep a copy of them for your reference.
+      Welcome to https://teamvitalency.com. The https://teamvitalency.com
+      website (the "Site") is comprised of various web pages operated by
+      Vitalency, LLC ("4336 Creekbend Drive"). https://teamvitalency.com is
+      offered to you conditioned on your acceptance without modification of the
+      terms, conditions, and notices contained herein (the "Terms"). Your use of
+      https://teamvitalency.com constitutes your agreement to all such Terms.
+      Please read these terms carefully, and keep a copy of them for your
+      reference.
     </p>
 
     <p>
@@ -17,7 +24,8 @@
     </p>
 
     <p>
-      The Site exists to provide health coaching and discussion about related topics to its members.
+      The Site exists to provide health coaching and discussion about related
+      topics to its members.
     </p>
 
     <h2>
@@ -25,7 +33,9 @@
     </h2>
 
     <p>
-      Your use of https://teamvitalency.com is subject to 4336 Creekbend Drive's Privacy Policy. Please review our Privacy Policy, which also governs the Site and informs users of our data collection practices.
+      Your use of https://teamvitalency.com is subject to 4336 Creekbend Drive's
+      Privacy Policy. Please review our Privacy Policy, which also governs the
+      Site and informs users of our data collection practices.
     </p>
 
     <h2>
@@ -33,7 +43,12 @@
     </h2>
 
     <p>
-      Visiting https://teamvitalency.com or sending emails to 4336 Creekbend Drive constitutes electronic communications. You consent to receive electronic communications and you agree that all agreements, notices, disclosures and other communications that we provide to you electronically, via email and on the Site, satisfy any legal requirement that such communications be in writing.
+      Visiting https://teamvitalency.com or sending emails to 4336 Creekbend
+      Drive constitutes electronic communications. You consent to receive
+      electronic communications and you agree that all agreements, notices,
+      disclosures and other communications that we provide to you
+      electronically, via email and on the Site, satisfy any legal requirement
+      that such communications be in writing.
     </p>
 
     <h2>
@@ -41,7 +56,16 @@
     </h2>
 
     <p>
-      If you use this site, you are responsible for maintaining the confidentiality of your account and password and for restricting access to your computer, and you agree to accept responsibility for all activities that occur under your account or password. You may not assign or otherwise transfer your account to any other person or entity. You acknowledge that 4336 Creekbend Drive is not responsible for third party access to your account that results from theft or misappropriation of your account. 4336 Creekbend Drive and its associates reserve the right to refuse or cancel service, terminate accounts, or remove or edit content in our sole discretion.
+      If you use this site, you are responsible for maintaining the
+      confidentiality of your account and password and for restricting access to
+      your computer, and you agree to accept responsibility for all activities
+      that occur under your account or password. You may not assign or otherwise
+      transfer your account to any other person or entity. You acknowledge that
+      4336 Creekbend Drive is not responsible for third party access to your
+      account that results from theft or misappropriation of your account. 4336
+      Creekbend Drive and its associates reserve the right to refuse or cancel
+      service, terminate accounts, or remove or edit content in our sole
+      discretion.
     </p>
 
     <h2>
@@ -240,5 +264,5 @@
     <p>
       Effective as of July 02, 2019
     </p>
-  </div>
+  </div> 
 </template>
