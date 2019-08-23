@@ -1,3 +1,4 @@
+<!-- eslint-disable -->
 <template>
   <div>
     <h1>
@@ -266,3 +267,4 @@
     </p>
   </div> 
 </template>
+<!-- eslint-enable -->
