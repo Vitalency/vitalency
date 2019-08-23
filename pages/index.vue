@@ -32,11 +32,21 @@
                 </p>
               </header>
               <div class="signup-form">
+                <label class="vt-input-container mb-1">
+                  <span
+                    style="top: 0; left: 16px; line-height: 42px;"
+                    class="vt-input-label absolute"
+                  >
+                    Email
+                  </span>
+                  <input type="text" class="vt-input" v-model="emailAddress"/>
+                </label>
                 <button
+                  type="button"
                   class="btn btn-primary btn-full"
-                  @click="loginWithFacebook"
+                  @click="sendForm"
                 >
-                  Get started using Facebook
+                  Get started
                 </button>
               </div>
             </div>
@@ -70,9 +80,18 @@
 
 <script>
 import firebase from 'firebase'
+import Pageclip from 'pageclip'
+
+const pageclipAPIKey = 'api_MrrBhcaFOWBYtPPOx0bsGjFvnvg5NeDS'
+const pageclip = new Pageclip(pageclipAPIKey)
 
 export default {
   components: {},
+  data() {
+    return {
+      emailAddress: ''
+    }
+  },
   computed: {
     isFacebookAuthed() {
       return this.$store.state.isFacebookAuthed
@@ -80,6 +99,16 @@ export default {
   },
   middleware: 'auth',
   methods: {
+    submitEmail(email) {
+      const data = { email }
+
+      pageclip.send(data).then((response) => {
+        this.$store.commit('authFacebook', true)
+      }).then(() => {
+        return pageclip.fetch()
+      }).then((response) => {
+      })
+    },
     loginWithFacebook: function() {
       // Setup the facebook provider and request the attributes we need
       this.provider = new firebase.auth.FacebookAuthProvider()
@@ -272,6 +301,29 @@ p {
 
 .signup-form-container.flipped {
   transform: rotateY(-180deg);
+}
+
+.vt-input-container {
+  @apply block;
+  @apply relative;
+}
+
+.vt-input {
+  @apply pl-8;
+  @apply font-semibold;
+  @apply font-title;
+  width: 100%;
+  height: 42px;
+  color: #ff6b81;
+  background: rgba(255, 107, 129, 0.04);
+  border: 1px solid rgba(255, 107, 129, 0.4);
+  border-radius: 21px;
+}
+
+.vt-input-label {
+  @apply font-title;
+  @apply font-bold;
+  color: #ff6b81;
 }
 
 .thank-you-container {
