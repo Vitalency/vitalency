@@ -12,7 +12,9 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "deploy": "nuxt generate && firebase deploy",
-    "deploy-production": "mv .env .env-dev && mv .env-prod .env && nuxt generate && firebase use vitalency-prod && firebase deploy && firebase use vitalency-dev && mv .env .env-prod && mv .env-dev .env"
+    "deploy-production": "cp .env-prod .env && nuxt generate && firebase use vitalency-prod && firebase deploy && firebase use vitalency-dev && cp .env-dev .env",
+    "functions": "firebase deploy --only functions",
+    "functions-production": ""
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
