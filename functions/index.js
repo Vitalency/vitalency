@@ -3,7 +3,7 @@
 const functions = require('firebase-functions');
 const nodemailer = require('nodemailer');
 // Configure the email transport using the default SMTP transport and a GMail account.
-// NOTE: these get set by running: firebase functions:config:set gmail.email="EMAIL@ADDRESS.COM" gmail.password="PASSWORD"
+// NOTE: these get set by running: firebase functions:config:set gmail.email="EMAIL@ADDRESS.COM" gmail.password="PASSWORD" signups.recipient="signups@teamvitalency.com"
 // NOTE: this should only have to be done once per environment
 const gmailEmail = functions.config().gmail.email;
 const gmailPassword = functions.config().gmail.password;
