@@ -11,10 +11,12 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "deploy": "nuxt generate && firebase deploy",
-    "deploy-production": "cp .env-prod .env && nuxt generate && firebase use vitalency-prod && firebase deploy && firebase use vitalency-dev && cp .env-dev .env",
-    "functions": "firebase deploy --only functions",
-    "functions-production": ""
+    "deploy": "yarn set-env-dev && nuxt generate && firebase deploy",
+    "deploy-production": "yarn set-env-prod && nuxt generate && firebase use vitalency-prod && firebase deploy && firebase use vitalency-dev && yarn set-env-dev",
+    "functions": "yarn set-env-dev && firebase deploy --only functions",
+    "functions-production": "yarn set-env-prod && firebase use vitalency-prod && firebase deploy --only functions && firebase use vitalency-dev && yarn set-env-dev",
+    "set-env-dev": "cp .env-dev .env",
+    "set-env-prod": "cp .env-prod .env"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
