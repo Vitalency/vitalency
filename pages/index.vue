@@ -39,7 +39,7 @@
                   >
                     Email
                   </span>
-                  <input type="text" class="vt-input" v-model="emailAddress"/>
+                  <input type="email" class="vt-input" v-model="emailAddress"/>
                 </label>
                 <button
                   type="submit"
@@ -90,10 +90,21 @@ export default {
   },
   methods: {
     submitEmail(event) {
+      // Validate this is a real email address before we send it. If it's not, exit
+      if (!this.validateEmailAddress(this.emailAddress)) return
+
       this.uploadEmailAddressToFirestore(this.emailAddress)
         .then(() => {
           this.isUserAuthed = true
         })
+    },
+    validateEmailAddress(emailAddress) {
+      // Validate it's even provided
+      if (!emailAddress) return false
+
+      // Use the regex provided by https://www.regular-expressions.info/email.html to test this is a valid email
+      const emailAddressRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
+      return emailAddressRegex.test(emailAddress)
     },
     uploadEmailAddressToFirestore(emailAddress) {
       return firebase
@@ -252,6 +263,9 @@ p {
   background: rgba(255, 107, 129, 0.04);
   border: 1px solid rgba(255, 107, 129, 0.4);
   border-radius: 21px;
+}
+.vt-input:invalid {
+  border-color: #ff6f79;
 }
 
 .vt-input-label {
