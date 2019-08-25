@@ -19,7 +19,7 @@
           <div class="flip-container mb-8">
             <div
               class="signup-form-container"
-              :class="{ flipped: isFacebookAuthed }"
+              :class="{ flipped: isUserAuthed }"
             >
               <header class="p-4">
                 <div class="font-title font-semibold text-3xl mb-1">
@@ -31,7 +31,7 @@
                   health coach soon to get started!
                 </p>
               </header>
-              <div class="signup-form">
+              <form class="signup-form" @submit.prevent="submitEmail">
                 <label class="vt-input-container mb-1">
                   <span
                     style="top: 0; left: 16px; line-height: 42px;"
@@ -42,17 +42,16 @@
                   <input type="text" class="vt-input" v-model="emailAddress"/>
                 </label>
                 <button
-                  type="button"
+                  type="submit"
                   class="btn btn-primary btn-full"
-                  @click="sendForm"
                 >
                   Get started
                 </button>
-              </div>
+              </form>
             </div>
             <div
               class="thank-you-container"
-              :class="{ flipped: isFacebookAuthed }"
+              :class="{ flipped: isUserAuthed }"
             >
               <div>
                 <div class="mb-2">
@@ -80,93 +79,28 @@
 
 <script>
 import firebase from 'firebase'
-import Pageclip from 'pageclip'
-
-const pageclipAPIKey = 'api_MrrBhcaFOWBYtPPOx0bsGjFvnvg5NeDS'
-const pageclip = new Pageclip(pageclipAPIKey)
 
 export default {
   components: {},
   data() {
     return {
-      emailAddress: ''
+      emailAddress: '',
+      isUserAuthed: false
     }
   },
-  computed: {
-    isFacebookAuthed() {
-      return this.$store.state.isFacebookAuthed
-    }
-  },
-  middleware: 'auth',
   methods: {
-    submitEmail(email) {
-      const data = { email }
-
-      pageclip.send(data).then((response) => {
-        this.$store.commit('authFacebook', true)
-      }).then(() => {
-        return pageclip.fetch()
-      }).then((response) => {
-      })
-    },
-    loginWithFacebook: function() {
-      // Setup the facebook provider and request the attributes we need
-      this.provider = new firebase.auth.FacebookAuthProvider()
-      this.provider.addScope('user_birthday')
-      this.provider.addScope('email')
-      this.provider.addScope('user_gender')
-      this.provider.addScope('user_location')
-      this.provider.addScope('user_link')
-
-      // Make the auth request using a popup. We may want to consider the redirect workflow if we are mostly seeing mobile users.
-      firebase
-        .auth()
-        .signInWithPopup(this.provider)
-        .then((result) => {
-          // We'll update the user's data every time they authenticate with facebook
-          this.writeUserDetailsToFirestore({
-            uid: result.user.uid,
-            firstName: result.additionalUserInfo.profile.first_name,
-            lastName: result.additionalUserInfo.profile.last_name,
-            gender: result.additionalUserInfo.profile.gender,
-            facebookProfileLink: result.additionalUserInfo.profile.link,
-            birthday: result.additionalUserInfo.profile.birthday
-          })
-
-          // Update our store so we know this person is authenticated, and then redirect to the thank you page
-          this.$store.commit('setUser', result.user)
-          this.$store.commit('authFacebook', true)
-        })
-        .catch((error) => {
-          const errorCode = error.code
-          const errorMessage = error.message
-
-          if (errorCode === 'auth/account-exists-with-different-credential') {
-            alert('You have already signed up with that email address.')
-          } else {
-            alert(`Error code ${errorCode} with message "${errorMessage}"`)
-          }
+    submitEmail(event) {
+      this.uploadEmailAddressToFirestore(this.emailAddress)
+        .then(() => {
+          this.isUserAuthed = true
         })
     },
-
-    writeUserDetailsToFirestore(userDetails) {
-      const birthday = new Date(userDetails.birthday)
-
-      // The UID will be used as the key
-      firebase
+    uploadEmailAddressToFirestore(emailAddress) {
+      return firebase
         .firestore()
-        .collection('users')
-        .doc(userDetails.uid)
-        .set({
-          firstName: userDetails.firstName,
-          lastName: userDetails.lastName,
-          gender: userDetails.gender,
-          facebookProfileLink: userDetails.facebookProfileLink,
-          birthday: {
-            month: birthday.getMonth() + 1,
-            day: birthday.getDate(),
-            year: birthday.getFullYear()
-          }
+        .collection('signUpEmails')
+        .add({
+          emailAddress: emailAddress
         })
     }
   }

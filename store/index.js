@@ -5,7 +5,7 @@ const createStore = () => {
   return new Vuex.Store({
     state: {
       user: null,
-      isFacebookAuthed: false
+      isUserAuthed: false
     },
     getters: {
       activeUser: (state, getters) => {
