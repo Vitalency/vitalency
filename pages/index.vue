@@ -7,9 +7,10 @@
       <div class="hero-content-container">
         <div class="hero-content">
           <div class="hero-content-info">
-            <div style="line-height: 1.25;" class="text-5xl font-title mb-2">
-              Check-ins to keep you in check
-            </div>
+            <div
+              style="line-height: 1.25;"
+              class="text-5xl font-title mb-2"
+            >Check-ins to keep you in check</div>
             <p class="text-xl text-white mb-8 tablet:mb-0">
               Support your day to day with a health coach to stay on track with
               your pregnancy. Set goals that work for you and your baby’s health
@@ -17,52 +18,92 @@
             </p>
           </div>
           <div class="flip-container mb-8">
-            <div
-              class="signup-form-container"
-              :class="{ flipped: isUserAuthed }"
-            >
+            <div class="signup-form-container" :class="{ flipped: isUserAuthed }">
               <header class="p-4">
-                <div class="font-title font-semibold text-3xl mb-1">
-                  Join Vitalency
-                </div>
+                <div class="font-title font-semibold text-3xl mb-1">Join Vitalency</div>
                 <p class="text-lg">
                   Your first step is meeting your awesome new health coach.
-                  Connect to your facebook below and you'll hear from your
+                  Answer just a few questions below and you'll hear from your
                   health coach soon to get started!
                 </p>
               </header>
-              <form class="signup-form" @submit.prevent="submitEmail">
-                <label class="vt-input-container mb-1">
-                  <span
-                    style="top: 0; left: 16px; line-height: 42px;"
-                    class="vt-input-label absolute"
-                  >
-                    Email
-                  </span>
-                  <input type="email" class="vt-input" v-model="emailAddress"/>
-                </label>
-                <button
-                  type="submit"
-                  class="btn btn-primary btn-full"
-                >
-                  Get started
-                </button>
+              <form class="signup-form" @submit.prevent="submitDetails">
+                <div v-if="formState === 1">
+                  <div
+                    class="mb-2 font-title font-semibold text-lg"
+                  >Are you expecting or have you delivered?</div>
+                  <div class="flex items-center mb-1">
+                    <button
+                      type="button"
+                      class="btn flex-1 mr-sm"
+                      @click="setPregnancyDetail(true)"
+                    >Expecting</button>
+                    <button
+                      type="button"
+                      class="btn flex-1 ml-sm"
+                      @click="setPregnancyDetail(false)"
+                    >Delivered</button>
+                  </div>
+                </div>
+
+                <div v-if="formState === 2">
+                  <div v-if="!healthConditions">
+                    <div
+                      class="mb-2 font-title font-semibold text-lg"
+                    >Do you have any current medical conditions?</div>
+                    <div class="flex items-center mb-1">
+                      <button
+                        type="button"
+                        class="btn flex-1 mr-sm"
+                        @click="sethealthCondition(false)"
+                      >No</button>
+                      <button
+                        type="button"
+                        class="btn flex-1 ml-sm"
+                        @click="sethealthCondition(true)"
+                      >Yes</button>
+                    </div>
+                  </div>
+
+                  <div v-if="healthConditions">
+                    <div
+                      class="mb-2 font-title font-semibold text-lg"
+                    >What are the medical conditions details?</div>
+                    <div class="flex items-center mb-1">
+                      <textarea class="vt-textarea p-2" v-model="healthConditionDetail"></textarea>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-full" @click="nextForm">Next</button>
+                  </div>
+                </div>
+
+                <div v-if="formState === 3">
+                  <div
+                    class="mb-2 font-title font-semibold text-lg"
+                  >What are you looking to achieve by working with a Vitalency Health Coach?</div>
+                  <div class="flex items-center mb-1">
+                    <textarea class="vt-textarea p-2" v-model="goalDetail"></textarea>
+                  </div>
+                  <button type="button" class="btn btn-primary btn-full" @click="nextForm">Next</button>
+                </div>
+
+                <div v-if="formState === 4">
+                  <label class="vt-input-container mb-1">
+                    <span
+                      style="top: 0; left: 16px; line-height: 42px;"
+                      class="vt-input-label absolute"
+                    >Email</span>
+                    <input type="email" class="vt-input" v-model="emailAddress" />
+                  </label>
+                  <button type="submit" class="btn btn-primary btn-full">Get started</button>
+                </div>
               </form>
             </div>
-            <div
-              class="thank-you-container"
-              :class="{ flipped: isUserAuthed }"
-            >
+            <div class="thank-you-container" :class="{ flipped: isUserAuthed }">
               <div>
                 <div class="mb-2">
-                  <img
-                    src="~assets/images/logo-icon.svg"
-                    alt="vitalency logo"
-                  />
+                  <img src="~assets/images/logo-icon.svg" alt="vitalency logo" />
                 </div>
-                <div class="font-title font-semibold text-3xl mb-1">
-                  Thank you!
-                </div>
+                <div class="font-title font-semibold text-3xl mb-1">Thank you!</div>
                 <p class="text-lg">
                   Your Vitalency health coach will be reaching out to you soon
                   to get started. We're very excited to work with you!
@@ -84,19 +125,36 @@ export default {
   components: {},
   data() {
     return {
+      formState: 1,
       emailAddress: '',
+      isPregnant: '',
+      healthConditions: false,
+      healthConditionDetail: '',
+      goalDetail: '',
       isUserAuthed: false
     }
   },
   methods: {
-    submitEmail(event) {
+    setPregnancyDetail(pregnantState) {
+      this.isPregnant = pregnantState
+      this.nextForm()
+    },
+    sethealthCondition(healthConditionState) {
+      this.healthConditions = healthConditionState
+      if (healthConditionState === false) {
+        this.nextForm()
+      }
+    },
+    nextForm() {
+      this.formState++
+    },
+    submitDetails(event) {
       // Validate this is a real email address before we send it. If it's not, exit
       if (!this.validateEmailAddress(this.emailAddress)) return
 
-      this.uploadEmailAddressToFirestore(this.emailAddress)
-        .then(() => {
-          this.isUserAuthed = true
-        })
+      this.uploadEmailAddressToFirestore(this.emailAddress).then(() => {
+        this.isUserAuthed = true
+      })
     },
     validateEmailAddress(emailAddress) {
       // Validate it's even provided
@@ -224,7 +282,7 @@ p {
   .flip-container {
     @apply w-1/2;
     transform: translateX(50%);
-    min-width: 368px;
+    min-width: 480px;
   }
 }
 
@@ -248,6 +306,22 @@ p {
   transform: rotateY(-180deg);
 }
 
+.vt-textarea {
+  @apply font-semibold;
+  @apply font-title;
+  width: 100%;
+  height: 84px;
+  color: #ff6b81;
+  background: rgba(255, 107, 129, 0.04);
+  border: 1px solid rgba(255, 107, 129, 0.4);
+  border-radius: 8px;
+  resize: none;
+}
+
+.vt-textarea:focus {
+  @apply outline-none;
+}
+
 .vt-input-container {
   @apply block;
   @apply relative;
@@ -264,6 +338,11 @@ p {
   border: 1px solid rgba(255, 107, 129, 0.4);
   border-radius: 21px;
 }
+
+.vt-input:focus {
+  @apply outline-none;
+}
+
 .vt-input:invalid {
   border-color: #ff6f79;
 }
@@ -318,6 +397,17 @@ p {
   text-transform: uppercase;
   border-color: rgba(255, 107, 129, 0.4);
   transition: all 150ms;
+}
+
+.btn:hover,
+.btn:active {
+  @apply text-white;
+  text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.16);
+  background: radial-gradient(250.55px at 0% 100%, #ff7f50 0%, #ff6b81 100%);
+}
+
+.btn:focus {
+  @apply outline-none;
 }
 
 .btn-primary {
