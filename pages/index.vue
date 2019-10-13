@@ -152,7 +152,15 @@ export default {
       // Validate this is a real email address before we send it. If it's not, exit
       if (!this.validateEmailAddress(this.emailAddress)) return
 
-      this.uploadEmailAddressToFirestore(this.emailAddress).then(() => {
+      const newProspect = {
+        emailAddress: this.emailAddress,
+        isPregnant: this.isPregnant,
+        healthConditions: this.healthConditions,
+        healthConditionDetail: this.healthConditionDetail.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&'),
+        goalDetail: this.goalDetail.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')
+      }
+
+      this.uploadEmailAddressToFirestore(newProspect).then(() => {
         this.isUserAuthed = true
       })
     },
@@ -164,13 +172,11 @@ export default {
       const emailAddressRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
       return emailAddressRegex.test(emailAddress)
     },
-    uploadEmailAddressToFirestore(emailAddress) {
+    uploadEmailAddressToFirestore(newProspect) {
       return firebase
         .firestore()
         .collection('signUpEmails')
-        .add({
-          emailAddress: emailAddress
-        })
+        .add(newProspect)
     }
   }
 }

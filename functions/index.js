@@ -24,7 +24,11 @@ exports.sendSignUpEmail = functions.firestore.document('/signUpEmails/{signUpId}
       from: gmailEmail,
       to: recipient,
       subject: "New user subscribed",
-      text: `New user subscribed with the following email ${data.emailAddress}`
+      text: `New user subscribed with the following email ${data.emailAddress}
+Pregnant or Expecting: ${data.isPregnant ? "pregnant" : "expecting"}
+Health conditions: ${data.healthConditions}
+Health condition details: ${data.healthConditionDetail}
+Goal details: ${data.goalDetail}`
     }
 
     try {
