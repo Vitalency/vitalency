@@ -36,12 +36,12 @@
                     <button
                       type="button"
                       class="btn flex-1 mr-sm"
-                      @click="setPregnancyDetail(true)"
+                      @click="setIsPregnant(true)"
                     >Expecting</button>
                     <button
                       type="button"
                       class="btn flex-1 ml-sm"
-                      @click="setPregnancyDetail(false)"
+                      @click="setIsPregnant(false)"
                     >Delivered</button>
                   </div>
                 </div>
@@ -135,7 +135,7 @@ export default {
     }
   },
   methods: {
-    setPregnancyDetail(pregnantState) {
+    setIsPregnant(pregnantState) {
       this.isPregnant = pregnantState
       this.nextForm()
     },
@@ -159,6 +159,8 @@ export default {
         healthConditionDetail: this.healthConditionDetail.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&'),
         goalDetail: this.goalDetail.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')
       }
+
+      // console.log(newProspect) // eslint-disable-line no-console
 
       this.uploadEmailAddressToFirestore(newProspect).then(() => {
         this.isUserAuthed = true
