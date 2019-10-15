@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container px-4 py-8 mx-auto">
     <h1>Privacy Policy</h1>
 
     <p>
@@ -20,26 +20,14 @@
       your:
     </p>
 
-    <div>
-      <li>
-        - First and Last Name
-      </li>
-      <li>
-        - Mailing Address
-      </li>
-      <li>
-        - E-mail Address
-      </li>
-      <li>
-        - Phone Number
-      </li>
-      <li>
-        - Age
-      </li>
-      <li>
-        - Gender
-      </li>
-    </div>
+    <ul>
+      <li>- First and Last Name</li>
+      <li>- Mailing Address</li>
+      <li>- E-mail Address</li>
+      <li>- Phone Number</li>
+      <li>- Age</li>
+      <li>- Gender</li>
+    </ul>
 
     <p>
       If you purchase Vitalency's products and services, we collect billing and
@@ -52,14 +40,10 @@
       unique to you, such as your:
     </p>
 
-    <div>
-      <li>
-        - Race
-      </li>
-      <li>
-        - Education Status
-      </li>
-    </div>
+    <ul>
+      <li>- Race</li>
+      <li>- Education Status</li>
+    </ul>
 
     <p>
       Please keep in mind that if you directly disclose personally identifiable
@@ -97,9 +81,7 @@
 
     <h2>Sharing Information with Third Parties</h2>
 
-    <p>
-      Vitalency does not sell, rent or lease its customer lists to third parties
-    </p>
+    <p>Vitalency does not sell, rent or lease its customer lists to third parties</p>
 
     <p>
       Vitalency may share data with trusted partners to help perform statistical
@@ -193,14 +175,10 @@
       or disclosure. Vitalency uses the following methods for this purpose:
     </p>
 
-    <div>
-      <li>
-        - SSL Protocol
-      </li>
-      <li>
-        - Data encryption of personally identifiable information
-      </li>
-    </div>
+    <ul>
+      <li>- SSL Protocol</li>
+      <li>- Data encryption of personally identifiable information</li>
+    </ul>
 
     <p>
       When personal information (such as a credit card number) is transmitted to
@@ -289,10 +267,28 @@
       please contact Vitalency at:
     </p>
 
-    <p>Vitalency, LLC. 4336 Creekbend Drive, Hilliard, Ohio 43026</p>
+    <p>Vitalency, LLC.</p>
 
     <p>Email Address: privacy@teamvitalency.com</p>
 
     <p>Effective as of August 11, 2019</p>
   </div>
 </template>
+
+<style scoped>
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-semibold;
+  @apply font-title;
+  @apply mb-1;
+}
+
+p,
+ul {
+  @apply mb-3;
+}
+</style>
