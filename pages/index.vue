@@ -10,9 +10,9 @@
             <div
               style="line-height: 1.25;"
               class="text-5xl font-title mb-2"
-            >Check-ins to keep you in check</div>
+            >Check-ins to keep you in check - from anywhere.</div>
             <p class="text-xl text-white mb-8 tablet:mb-0">
-              Support your day to day with a health coach to stay on track with
+              Support your day to day with a virtual health coach to stay on track with
               your pregnancy. Set goals that work for you and your baby’s health
               - we’ll follow your lead.
             </p>
@@ -147,6 +147,7 @@ export default {
     },
     nextForm() {
       this.formState++
+      this.$forceUpdate()
     },
     submitDetails(event) {
       // Validate this is a real email address before we send it. If it's not, exit
