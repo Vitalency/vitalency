@@ -147,7 +147,6 @@ export default {
     },
     nextForm() {
       this.formState++
-      this.$forceUpdate()
     },
     submitDetails(event) {
       // Validate this is a real email address before we send it. If it's not, exit
